@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch User</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>Тест fetchUser</h1>
+
+<input type="text" id="userIdInput" placeholder="Введите ID пользователя" />
+<button onclick="fetchUserFromInput()">Получить пользователя</button>
+
+<pre id="output"></pre>
+
+<script>
+    async function fetchUser(id) {
+        try {
+            const token = localStorage.getItem('authToken');
+            console.log('Token:', token);
+
+            const response = await axios.get(`http://localhost:8080/api/v1/user/${id}`, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            });
+
+            console.log(response.data);
+            document.getElementById('output').textContent = JSON.stringify(response.data.user, null, 2);
+            return response.data.user;
+
+        } catch (error) {
+            console.error('Ошибка запроса:', error);
+            document.getElementById('output').textContent = error.response?.data?.message || error.message;
+        }
+    }
+
+    function fetchUserFromInput() {
+        const id = document.getElementById('userIdInput').value;
+        fetchUser(id);
+    }
+
+    // Пример: предварительно установим токен (только для теста)
+    localStorage.setItem('authToken', 'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIzMzMzIiwiZW1haWwiOiIzMzMzIiwiaWF0IjoxNzQ0NjYxODA0LCJleHAiOjE3NDQ4MzQ2MDR9.FD6hffLGdfxc8gJM2LedzlRZdqT0_hVj3Z9joreo1qccafRk2T6LL4c6v8Bk-Xqj');
+</script>
+</body>
+</html>
