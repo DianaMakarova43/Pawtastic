@@ -28,7 +28,7 @@
               {{themeIconTitle}}
             </v-btn>
           </v-list-item>
-          <v-list-item @click="">
+          <v-list-item @click="$router.push('/profile')">
             <v-list-item-title>Профиль аккаунта</v-list-item-title>
           </v-list-item>
           <v-list-item @click="$router.push('/')">

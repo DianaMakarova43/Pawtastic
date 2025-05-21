@@ -6,6 +6,7 @@ import ModulesPage from "../pages/Main/ModulesPage.vue";
 import ModulesAddPage from "../pages/Main/ModulesAddPage.vue";
 import ModulesCardsPage from "../pages/Main/ModulesCardsPage.vue";
 import LoginPage from "../pages/LoginPage.vue";
+import ProfilePage from "../pages/ProfilePage.vue";
 import AdminPage from "../pages/admin/AdminPage.vue";
 
 // Макеты
@@ -19,13 +20,17 @@ const routes = [
         component: LoginPage,
     },
     {
+        path: '/profile',
+        component: ProfilePage,
+    },
+    {
         path: '/main',
         component: MainLayout,
         children: [
             { path: '/main/floders', name: 'FlodersPage', component: FlodersPage },
             { path: '/main/modules', name: 'ModulesPage', component: ModulesPage },
             { path: '/main/modules/add', name: 'ModulesAddPage', component: ModulesAddPage },
-            { path: '/main/modules/cards', name: 'ModulesCardsPage', component: ModulesCardsPage },
+            { path: '/main/modules/cards/:id', name: 'ModulesCardsPage', component: ModulesCardsPage },
         ],
     },
     {

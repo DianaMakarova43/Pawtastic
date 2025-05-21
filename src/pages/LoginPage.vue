@@ -70,6 +70,16 @@
       <p class="mt-4 font-semibold no-underline hover:underline cursor-pointer" @click="auth = false">Есть аккаунт?
         Войдите!</p>
     </div>
+    <v-btn
+        @click="fetchUser(1)"
+        class="mt-2"
+        text="1"
+    ></v-btn>
+    <v-btn
+        @click="patchUser(1, this.userName)"
+        class="mt-2"
+        text="2"
+    ></v-btn>
   </div>
   <my-snackbar :text="text" :color="color" ref="snackbarRef" />
 </template>

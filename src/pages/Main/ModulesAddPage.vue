@@ -1,12 +1,15 @@
 <script>
 import CodeBlock from '../../components/CodeBlock.vue'
 import 'prismjs/components/prism-java'
+import moduleMixin from "../../mixins/ModuleMixin.vue";
+import itemsMixin from "../../mixins/ItemsMixin.vue";
 
 export default {
   name: "ModulesAddPage",
   components: {
     CodeBlock
   },
+  mixins: [moduleMixin, itemsMixin],
   data() {
     return {
       selectedLanguage: 'java',
@@ -18,7 +21,8 @@ export default {
         {title: "", desc: "", sampleCode: "", visibleCode: false, visibleImg: false},
         {title: "", desc: "", sampleCode: "", visibleCode: false, visibleImg: false},
         {title: "", desc: "", sampleCode: "", visibleCode: false, visibleImg: false},
-      ]
+      ],
+      moduleId: '',
     }
   },
   watch: {
@@ -35,6 +39,14 @@ export default {
     },
     deleteCard(index) {
       this.cards.splice(index, 1)
+    },
+    async addNewModule() {
+      const response = await this.postModule(this.nameInput, this.descInput)
+      this.moduleId = response.id
+      for (let i = 0; i < this.cards.length; i++) {
+        await this.postItem(this.cards[i].title, this.cards[i].desc, this.cards[i].sampleCode, this.moduleId)
+      }
+
     }
   }
 }
@@ -105,12 +117,20 @@ export default {
 
     </v-card>
   </template>
-  <v-btn
-      @click="addNewCard"
-      class="mt-2"
-      color="green"
-      text="Добавить карточку"
-  ></v-btn>
+  <div class="d-flex flex-column justify-center align-center">
+    <v-btn
+        @click="addNewCard"
+        class="mt-2"
+        color="blue"
+        text="Добавить карточку"
+    ></v-btn>
+    <v-btn
+        @click="addNewModule"
+        class="mt-4 w-full font-weight-bold"
+        color="green"
+        text="Создать модуль"
+    ></v-btn>
+  </div>
 </template>
 
 <style scoped>

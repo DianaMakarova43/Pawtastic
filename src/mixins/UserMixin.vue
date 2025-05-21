@@ -31,10 +31,10 @@ export default {
         console.log(error.message);
       }
     },
-    async patchUser(username, password, email, role) {
+    async patchUser(id, username) {
       try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.patch(`http://localhost:8080/api/v1/user/${id}`, {username, email, password, role}, {headers: {Authorization: 'Bearer ' + token}});
+        const response = await axios.patch(`http://localhost:8080/api/v1/user/${id}`, {username}, {headers: {Authorization: 'Bearer ' + token}});
         return response.data.user;
       } catch (error) {
         console.log(error.message);

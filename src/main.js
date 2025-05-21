@@ -8,7 +8,7 @@ import 'prismjs'
 import 'prismjs/themes/prism-twilight.css' // или другой стиль
 import 'prismjs/components/prism-java'
 
-import { VBtn, VCard, VCardText, VSpacer, VForm, VSelect, VFileInput, VCardActions, VTextarea, VSnackbar, VTextField, VSheet, VCheckbox, VApp, VContainer, VFooter, VDialog, VAppBar, VAppBarNavIcon, VAppBarTitle, VIcon, VMenu, VList, VListItem, VListItemTitle, VAvatar } from 'vuetify/components';
+import { VBtn, VCard, VCardText, VSlideXTransition, VSpacer, VForm, VSelect, VFileInput, VCardActions, VTextarea, VSnackbar, VTextField, VSheet, VCheckbox, VApp, VContainer, VFooter, VDialog, VAppBar, VAppBarNavIcon, VAppBarTitle, VIcon, VMenu, VList, VListItem, VListItemTitle, VAvatar } from 'vuetify/components';
 
 const vuetify = createVuetify({
     theme: {
@@ -45,6 +45,7 @@ app.component('v-snackbar', VSnackbar);
 app.component('v-textarea', VTextarea);
 app.component('v-select', VSelect);
 app.component('v-file-input', VFileInput);
+app.component('v-slide-x-transition', VSlideXTransition);
 
 app.use(vuetify);
 app.use(router);
