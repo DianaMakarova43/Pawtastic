@@ -35,6 +35,9 @@ export default {
       await new Promise(resolve => setTimeout(resolve, 2000));
       this.$router.push('/main/modules');
     },
+    editModuleOne(moduleId) {
+      this.$router.push({ name: 'ModulesEditPage', params: { id: moduleId } })
+    },
     nextCard() {
       if (this.currentIndex < this.cards.length - 1) {
         this.currentIndex++;
@@ -50,10 +53,12 @@ export default {
 </script>
 
 <template>
+  <v-btn @click="$router.push('/main/modules')" class="mb-4">Назад
+  </v-btn>
   <div class="d-flex justify-space-between align-center">
     <h2 class=" mb-4 text-3xl font-bold">{{ module.title || 'Загрузка...' }}</h2>
     <div>
-      <v-btn @click.stop="" class="mr-2">
+      <v-btn @click="editModuleOne(moduleId)" class="mr-2">
         <v-icon color="blue">mdi-pen</v-icon>
       </v-btn>
       <v-btn @click.stop="deleteModuleOne(moduleId)">
@@ -76,8 +81,7 @@ export default {
 
         <!-- Back Side -->
         <v-card class="flip-card-back">
-          <v-card-text class="d-flex flex-column justify-center align-center">
-            <h2 class="mb-4 text-3xl font-bold">{{ cards[currentIndex].title }}</h2>
+          <v-card-text class="d-flex flex-column ">
             <div class="mb-4 text-xl">{{ cards[currentIndex].description }}</div>
             <CodeBlock
                 class="w-full"

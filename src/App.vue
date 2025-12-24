@@ -31,7 +31,7 @@
           <v-list-item @click="$router.push('/profile')">
             <v-list-item-title>Профиль аккаунта</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="$router.push('/')">
+          <v-list-item v-if="token" @click="logout">
             <v-list-item-title>Выйти из аккаунта</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -56,7 +56,14 @@ export default {
       {title: 'Папки', path: '/main/floders'},
       {title: 'Модули', path: '/main/modules'},
     ],
+    token: localStorage.getItem('authToken')
   }),
+  methods: {
+    logout() {
+      localStorage.removeItem('authToken');
+      this.$router.push('/');
+    }
+  },
   setup() {
     const theme = useTheme()
 
@@ -75,7 +82,7 @@ export default {
     return {
       toggleTheme,
       themeIcon,
-      themeIconTitle,
+      themeIconTitle
     }
   },
 }
